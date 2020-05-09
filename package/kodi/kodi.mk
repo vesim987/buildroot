@@ -196,6 +196,13 @@ KODI_DEPENDENCIES += libegl libglu libgl xlib_libX11 xlib_libXext \
 	xlib_libXrandr libdrm
 endif
 
+ifeq ($(BR2_PACKAGE_KODI_PLATFORM_SUPPORTS_GBM), y)
+KODI_CONF_OPTS += \
+	-DCORE_PLATFORM_NAME=gbm \
+	-DGBM_RENDER_SYSTEM=gles
+KODI_DEPENDENCIES += libegl libgles libdrm libinput libxkbcommon
+endif
+
 ifeq ($(BR2_PACKAGE_KODI_MYSQL),y)
 KODI_CONF_OPTS += -DENABLE_MYSQLCLIENT=ON
 KODI_DEPENDENCIES += mysql
